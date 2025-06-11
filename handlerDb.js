@@ -1,7 +1,7 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "";
+const uri = "mongodb+srv://ayden:idtVHp069SguGV8z@liamscluster.cmwhtwb.mongodb.net/";
 
-const dbName = " ";
+const dbName = "cien_anos_de_soledad";
 
 const client = new MongoClient(uri, {
   serverApi: {
