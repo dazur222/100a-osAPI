@@ -24,21 +24,43 @@ run().catch(console.dir);
 
 async function getPersonajes() {
      try { const data = await client.db(dbName).collection("personajes").find().toArray(); return data;} 
-        catch (error) { console.error(error); } 
+        catch (error) { console.error(error); return [];} 
 } 
 
 async function  getCapitulos(){
     try { const data = await client.db(dbName).collection("capitulos").find().toArray(); return data;} 
-    catch (error) { console.error(error); }
+    catch (error) { console.error(error); return [];}
 }
 
 
 async function getLugares(){
  try { const data = await client.db(dbName).collection("lugares").find().toArray(); return data;} 
-    catch (error) { console.error(error); }
+    catch (error) { console.error(error); return [];}
 }
 
 async function getObjetos(){
      try { const data = await client.db(dbName).collection("objetos").find().toArray(); return data;} 
-    catch (error) { console.error(error); }
+    catch (error) { console.error(error); return []; }
+}
+
+
+async function getPersonajesbyName(character){
+  try { const data = await client.db(dbName).collection("personajes").find({nombre: character}).toArray(); return data;}
+  catch (error) { console.error(error); return []; }
+}
+
+
+async function getCapitulosbyName(NameChapter){
+  try { const data = await client.db(dbName).collection("capitulos").find({nombre: NameChapter}).toArray(); return data;}
+  catch(error){console.error(error); return []; }q
+}
+
+async function getObjetobyName(objectName){
+  try { const data = await client.db(dbName).collection("objetos").find({nombre: objectName}).toArray(); return data;}
+  catch (error) { console.error(error); return []; }
+}
+
+async function getLugaresbyName(placeName){
+  try { const data = await client.db(dbName).collection("lugares").find({nombre: placeName}).toArray(); return data;}
+  catch (error) { console.error(error); return []; }
 }
