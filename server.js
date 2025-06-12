@@ -59,6 +59,16 @@ async function getObjetos() {
   }
 }
 
+async function getEventos() {
+  try {
+    await connectDB();
+    return await client.db(dbName).collection("eventos").find().toArray();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 async function getPersonajesbyName(character) {
   try {
     await connectDB();
@@ -98,6 +108,17 @@ async function getLugaresbyName(placeName) {
     return [];
   }
 }
+
+async function getEventobyName(eventName) {
+  try {
+    await connectDB();
+    return await client.db(dbName).collection("eventos").find({ nombre: eventName }).toArray();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
 app.use(express.static(path.join(__dirname,'public')))
 
 app.get('/search/personajes', async (req, res) => {
@@ -123,6 +144,13 @@ app.get('/search/objetos', async (req, res) => {
   const results = await getObjetobyName(q);
   res.json(results);
 });
+
+app.get('/search/eventos', async (req, res) => {
+  const { q } = req.query;
+  const results = await getEventobyName(q);
+  res.json(results);
+});
+
 app.get('/', (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, 'public') });
 });

@@ -20,18 +20,20 @@ function displayResults(data) {
     resultsDiv.innerText = 'No results found.';
     return;
   }
-  data.forEach(item => {
+  // Show all results in a single card
+  let cardHtml = `<div class="card">`;
+  data.forEach((item, idx) => {
+    // Use 'nombre' as title for each item, or fallback
     const title = item.nombre || Object.values(item)[0] || 'Sin título';
-    let cardHtml = `<div class="card">`;
     cardHtml += `<h3>${title}</h3>`;
-    // List all properties except _id and nombre
     Object.entries(item).forEach(([key, value]) => {
       if (key !== '_id' && key !== 'nombre') {
         cardHtml += `<p><strong>${key}:</strong> ${value}</p>`;
       }
     });
-    cardHtml += `</div>`;
-    cardsContainer.innerHTML += cardHtml;
+    if (idx < data.length - 1) cardHtml += '<hr />';
   });
+  cardHtml += `</div>`;
+  cardsContainer.innerHTML = cardHtml;
 }
 
