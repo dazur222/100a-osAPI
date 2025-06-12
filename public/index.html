@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>100 anus de soledad</title>
+  <link rel="stylesheet" href="index.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<header>
+  <h1>Buscador de anos de soledad</h1>
+</header>
+
+<body>
+
+<div class="bg-light">
+  <div class="container py-5">
+    <div class="search-container">
+      <div class="search-wrapper">
+        <div class="search-header">
+          <div class="search-input-group">
+            <input type="text" id="searchInput" placeholder="Search something...">
+            <i onclick="search()" class="fas fa-search search-icon" style="cursor: pointer"></i>
+          </div>
+
+          <select id="category">
+            <option value="personajes">Personajes</option>
+            <option value="capitulos">Capitulos</option>
+            <option value="lugares">Lugares</option>
+            <option value="objetos">Objetos</option>
+          </select>
+      </div>
+    </div>
+  </div>
+</div>  
+
+<div id="results"></div>
+
+<div class="cards-container" id="cardsContainer">
+  <!-- Las tarjetas se generan dinámicamente -->
+</div>
+
+<script src="crud.js"></script>
+</body>
+</html>

@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Buscador con Tarjetas</title>
-<style>
-  body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     background-color: #f0f2f5;
@@ -55,28 +48,3 @@
   .card p {
     color: #666;
   }
-</style>
-</head>
-<body>
-
-<header>
-  <h1>Buscador de Elementos</h1>
-</header>
-<input type="text" id="searchInput" placeholder="Search something...">
-<select id="category">
-  <option value="personajes">Personajes</option>
-  <option value="capitulos">Capitulos</option>
-  <option value="lugares">Lugares</option>
-  <option value="objetos">Objetos</option>
-</select>
-<button onclick="search()">Search</button>
-
-<div id="results"></div>
-
-<div class="cards-container" id="cardsContainer">
-  <!-- Las tarjetas se generan dinámicamente -->
-</div>
-
-<script src="crud.js"></script>
-</body>
-</html>

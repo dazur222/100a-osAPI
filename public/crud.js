@@ -12,14 +12,26 @@ try {
 }
 
 function displayResults(data) {
-const resultsDiv = document.getElementById('results');
-resultsDiv.innerHTML = '';
-if (data.length === 0) {
+  const resultsDiv = document.getElementById('results');
+  const cardsContainer = document.getElementById('cardsContainer');
+  resultsDiv.innerHTML = '';
+  cardsContainer.innerHTML = '';
+  if (data.length === 0) {
     resultsDiv.innerText = 'No results found.';
     return;
-}
-data.forEach(item => {
-    resultsDiv.innerHTML += `<pre>${JSON.stringify(item, null, 2)}</pre>`;
-});
+  }
+  data.forEach(item => {
+    const title = item.nombre || Object.values(item)[0] || 'Sin título';
+    let cardHtml = `<div class="card">`;
+    cardHtml += `<h3>${title}</h3>`;
+    // List all properties except _id and nombre
+    Object.entries(item).forEach(([key, value]) => {
+      if (key !== '_id' && key !== 'nombre') {
+        cardHtml += `<p><strong>${key}:</strong> ${value}</p>`;
+      }
+    });
+    cardHtml += `</div>`;
+    cardsContainer.innerHTML += cardHtml;
+  });
 }
 
