@@ -64,3 +64,4 @@ async function getLugaresbyName(placeName){
   try { const data = await client.db(dbName).collection("lugares").find({nombre: placeName}).toArray(); return data;}
   catch (error) { console.error(error); return []; }
 }
+ 

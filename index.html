@@ -62,58 +62,21 @@
 <header>
   <h1>Buscador de Elementos</h1>
 </header>
+<input type="text" id="searchInput" placeholder="Search something...">
+<select id="category">
+  <option value="personajes">Personajes</option>
+  <option value="capitulos">Capitulos</option>
+  <option value="lugares">Lugares</option>
+  <option value="objetos">Objetos</option>
+</select>
+<button onclick="search()">Search</button>
 
-<div class="search-container">
-  <input type="text" id="searchInput" placeholder="Busca un elemento..." oninput="searchCards()" />
-</div>
+<div id="results"></div>
 
 <div class="cards-container" id="cardsContainer">
   <!-- Las tarjetas se generan dinámicamente -->
 </div>
 
-<script>
-  // Datos de ejemplo
-  const data = [
-    { title: "Elemento 1", description: "Descripción del elemento 1" },
-    { title: "Elemento 2", description: "Descripción del elemento 2" },
-    { title: "Elemento 3", description: "Descripción del elemento 3" },
-    { title: "Elemento 4", description: "Descripción del elemento 4" },
-    { title: "Elemento 5", description: "Descripción del elemento 5" }
-  ];
-
-  const cardsContainer = document.getElementById("cardsContainer");
-
-  // Mostrar todas las tarjetas al inicio
-  function showCards(filteredData) {
-    cardsContainer.innerHTML = "";
-    if (filteredData.length === 0) {
-      cardsContainer.innerHTML = "<p>No se encontraron resultados.</p>";
-      return;
-    }
-    filteredData.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <h3>${item.title}</h3>
-        <p>${item.description}</p>
-      `;
-      cardsContainer.appendChild(card);
-    });
-  }
-
-  // Filtrar tarjetas según el texto buscado
-  function searchCards() {
-    const searchText = document.getElementById("searchInput").value.toLowerCase();
-    const filteredData = data.filter(item =>
-      item.title.toLowerCase().includes(searchText) ||
-      item.description.toLowerCase().includes(searchText)
-    );
-    showCards(filteredData);
-  }
-
-  // Mostrar todas las tarjetas al cargar
-  showCards(data);
-</script>
-
+<script src="crud.js"></script>
 </body>
 </html>
