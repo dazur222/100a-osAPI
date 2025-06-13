@@ -6,7 +6,7 @@ const path = require("path")
 const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://ayden:idtVHp069SguGV8z@liamscluster.cmwhtwb.mongodb.net/";
 
-const dbName = "cien_anos_de_soledad";
+const dbName = "kevindb";
 
 const client = new MongoClient(uri);
 let isConnected = false;
@@ -98,6 +98,17 @@ async function getLugaresbyName(placeName) {
     return [];
   }
 }
+
+async function getEventobyName(eventname){
+  try{
+    await connectDB();
+    return await client.db(dbName).collection("eventos").find({evento: eventname}).toArray();
+  }catch(error){
+    console.error(error);
+    return [];
+  }
+}
+
 app.use(express.static(path.join(__dirname,'public')))
 
 app.get('/search/personajes', async (req, res) => {
@@ -123,6 +134,13 @@ app.get('/search/objetos', async (req, res) => {
   const results = await getObjetobyName(q);
   res.json(results);
 });
+
+app.get('/search/eventos', async (req,res) => {
+  const { q } = req.query;
+  const results = await getEventobyName(q);
+  res.json(results);
+});
+
 app.get('/', (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, 'public') });
 });
