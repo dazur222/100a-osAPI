@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require("path")
+const fs = require('fs');
 
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://ayden:idtVHp069SguGV8z@liamscluster.cmwhtwb.mongodb.net/";
 
 const dbName = "kevindb";
@@ -139,6 +140,39 @@ app.get('/search/eventos', async (req,res) => {
   const { q } = req.query;
   const results = await getEventobyName(q);
   res.json(results);
+  });
+
+app.put('/editar/:categoria/:id', async (req, res) => {
+console.log("PUT /editar llamado"); //NO IMPRIME NI MADRES
+console.log("Categoria:", categoria);
+console.log("ID:", id);
+console.log("Datos recibidos:", data);
+
+    const categoria = req.params.categoria; 
+    const id = req.params.id; 
+    const data = req.body;   
+  
+    try {
+      await connectDB();
+      if (!ObjectId.isValid(id)) {
+        console.error("ID inválido recibido:", id);
+        return res.status(400).json({ error: 'ID inválido: no es ObjectId VALIDO' });
+      }
+      
+      const result = await client.db(dbName).collection(categoria).updateOne(
+        { _id: new ObjectId(id) },
+        { $set: data }
+      );
+  
+      if (result.matchedCount === 0) {
+        return res.status(404).json({ error: 'Elemento no encontrado en MongoDB' });
+      }
+  
+      res.json({ mensaje: 'Elemento actualizado correctamente en MongoDB' });
+    } catch (error) {
+      console.error('Error actualizando MongoDB:', error);
+      res.status(500).json({ error: 'Error interno al actualizar en MongoDB' });
+    }
 });
 
 app.get('/', (req, res) => {
