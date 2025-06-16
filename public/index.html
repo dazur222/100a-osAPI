@@ -7,53 +7,53 @@
   <link rel="stylesheet" href="index.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
+<body style="font-family: 'Segoe UI', sans-serif; background: #f5f5f5; margin: 0; padding: 0;">
+  <header style="background-color: #282c34; color: white; padding: 1rem; text-align: center;">
+    <h1>Buscador de Cien Años de Soledad</h1>
+  </header>
 
-<header>
-  <h1>Buscador de años de soledad</h1>
-</header>
-
-<body>
-
-<div class="bg-light">
-  <div class="container py-5">
-    <div class="search-container">
-      <div class="search-wrapper">
-        <div class="search-header">
-          <div class="search-input-group">
-            <input type="text" id="searchInput" placeholder="Search something...">
-            <i onclick="search()" class="fas fa-search search-icon" style="cursor: pointer"></i>
-          </div>
-          
-          <select id="category">
-            <option value="personajes">Personajes</option>
-            <option value="capitulos">Capitulos</option>
-            <option value="lugares">Lugares</option>
-            <option value="objetos">Objetos</option>
-            <option value="eventos">Eventos</option>
-          </select>
+  <main style="max-width: 800px; margin: auto; padding: 2rem;">
+    
+    <section style="margin-bottom: 2rem;">
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <input type="text" id="searchInput" placeholder="Escribe tu pregunta o palabra clave..." 
+               style="flex: 1; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px;" />
+        <select id="category" style="padding: 10px; font-size: 1rem; border-radius: 4px;">
+          <option value="personajes">Personajes</option>
+          <option value="capitulos">Capítulos</option>
+          <option value="lugares">Lugares</option>
+          <option value="objetos">Objetos</option>
+          <option value="eventos">Eventos</option>
+        </select>
+        <button onclick="search()" style="padding: 10px 20px; font-size: 1rem; border-radius: 4px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+          Buscar
+        </button>
       </div>
-    </div>
-  </div>
-</div>  
-<div class="new-entry-form" style="margin: 20px;">
-  <h2>Agregar nuevo elemento</h2>
-  <select id="newCategory">
-    <option value="personajes">Personajes</option>
-    <option value="capitulos">Capítulos</option>
-    <option value="lugares">Lugares</option>
-    <option value="objetos">Objetos</option>
-    <option value="eventos">Eventos</option>
-  </select><br><br>
-  <input type="text" id="newNombre" placeholder="Nombre" style="width: 100%; padding: 5px;"><br><br>
-  <textarea id="newDescripcion" placeholder="Descripción" style="width: 100%; padding: 5px;" rows="3"></textarea><br><br>
-  <button onclick="agregarNuevo()" style="padding: 10px 20px;">Guardar nuevo</button>
-</div>
-<div id="results"></div>
+    </section>
 
-<div class="cards-container" id="cardsContainer">
-  
-</div>
+    <section style="background-color: white; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+      <h2 style="margin-top: 0;">Agregar nueva cosita</h2>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <select id="newCategory" style="padding: 10px; font-size: 1rem; border-radius: 4px;">
+          <option value="personajes">Personajes</option>
+          <option value="capitulos">Capítulos</option>
+          <option value="lugares">Lugares</option>
+          <option value="objetos">Objetos</option>
+          <option value="eventos">Eventos</option>
+        </select>
+        <input type="text" id="newNombre" placeholder="Nombre" style="padding: 10px; font-size: 1rem; border-radius: 4px;" />
+        <textarea id="newDescripcion" placeholder="Descripción" rows="3" style="padding: 10px; font-size: 1rem; border-radius: 4px;"></textarea>
+        <button onclick="agregarNuevo()" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px; font-size: 1rem;">
+          Guardar nuevo
+        </button>
+      </div>
+    </section>
 
-<script src="crud.js"></script>
+    <!-- Resultados -->
+    <div class="cards-container" id="cardsContainer" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+
+  </main>
+
+  <script src="crud.js"></script>
 </body>
 </html>

@@ -27,10 +27,10 @@ async function search() {
   
     
   
-  data.forEach((item, index) => {
-  const id = item._id;
-  const card = document.createElement('div');
-  card.className = 'card';
+    data.forEach((item, index) => {
+    const id = item._id;
+    const card = document.createElement('div');
+    card.className = 'card';
 
   let content = `
     <h3>${item.nombre || item.evento || item.titulo || 'Sin título'}</h3>
