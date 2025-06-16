@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>100 anus de soledad</title>
+  <title>100 años de soledad</title>
   <link rel="stylesheet" href="index.css"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <meta name="description" content="Descubre la magia de Cien Años de Soledad con nuestro buscador interactivo. Explora personajes, lugares, objetos y eventos en una experiencia visual única inspirada en México.">
@@ -13,44 +13,45 @@
   <meta name="theme-color" content="#e07a2a" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 </head>
-
-<header>
-  <h1>Buscador de años de soledad</h1>
-  <p style="font-size:1.2rem; color:#fffbe6; margin:0.5rem 0 0 0;">¡Explora, aprende y conecta con la historia!<br><span style='color:#ffe066;'>Patrocinado por <b>Macondo Tours</b> &amp; <b>Casa Real de México</b></span></p>
-</header>
-
 <body>
-<div class="desert-sun"></div>
-<div class="mexico-roof"></div>
-
-<div class="bg-light">
-  <div class="container py-5">
+  <header>
+    <h1>Buscador de Cien Años de Soledad</h1>
+  </header>
+  <main>
     <div class="search-container">
       <div class="search-wrapper">
         <div class="search-header">
           <div class="search-input-group">
-            <input type="text" id="searchInput" placeholder="Search something...">
-            <i onclick="search()" class="fas fa-search search-icon" style="cursor: pointer"></i>
+            <input type="text" id="searchInput" placeholder="Escribe tu pregunta o palabra clave...">
+            <button onclick="search()" class="fas fa-search search-icon" style="cursor: pointer; background: #b97a56; color: #fff; border: none; padding: 0.7em 1.2em; border-radius: 8px; margin-left: 0.5em;">Buscar</button>
           </div>
-
           <select id="category">
             <option value="personajes">Personajes</option>
-            <option value="capitulos">Capitulos</option>
+            <option value="capitulos">Capítulos</option>
             <option value="lugares">Lugares</option>
             <option value="objetos">Objetos</option>
             <option value="eventos">Eventos</option>
           </select>
+        </div>
       </div>
     </div>
-  </div>
-</div>  
-
-<div id="results"></div>
-
-<div class="cards-container" id="cardsContainer">
-  <!-- Las tarjetas se generan dinámicamente -->
-</div>
-
-<script src="crud.js"></script>
+    <div class="search-container" style="margin-top:2rem;">
+      <h2 style="margin-top: 0;">Agregar nuevo elemento</h2>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <select id="newCategory">
+          <option value="personajes">Personajes</option>
+          <option value="capitulos">Capítulos</option>
+          <option value="lugares">Lugares</option>
+          <option value="objetos">Objetos</option>
+          <option value="eventos">Eventos</option>
+        </select>
+        <input type="text" id="newNombre" placeholder="Nombre" />
+        <textarea id="newDescripcion" placeholder="Descripción" rows="3"></textarea>
+        <button onclick="agregarNuevo()" style="background: #a67c52; color: #fff; border: none; border-radius: 8px; padding: 0.7em 1.2em; font-size: 1rem;">Guardar nuevo</button>
+      </div>
+    </div>
+    <div class="cards-container" id="cardsContainer"></div>
+  </main>
+  <script src="crud.js"></script>
 </body>
 </html>

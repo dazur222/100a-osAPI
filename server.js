@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const path = require("path")
-
-const { MongoClient } = require('mongodb');
+const fs = require('fs');
+app.use(express.json());
+const { MongoClient, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://ayden:idtVHp069SguGV8z@liamscluster.cmwhtwb.mongodb.net/";
 
-const dbName = "cien_anos_de_soledad";
+const dbName = "kevindb";
 
 const client = new MongoClient(uri);
 let isConnected = false;
@@ -109,11 +110,11 @@ async function getLugaresbyName(placeName) {
   }
 }
 
-async function getEventobyName(eventName) {
-  try {
+async function getEventobyName(eventname){
+  try{
     await connectDB();
-    return await client.db(dbName).collection("eventos").find({ nombre: eventName }).toArray();
-  } catch (error) {
+    return await client.db(dbName).collection("eventos").find({evento: eventname}).toArray();
+  }catch(error){
     console.error(error);
     return [];
   }
@@ -145,11 +146,77 @@ app.get('/search/objetos', async (req, res) => {
   res.json(results);
 });
 
-app.get('/search/eventos', async (req, res) => {
+app.get('/search/eventos', async (req,res) => {
   const { q } = req.query;
   const results = await getEventobyName(q);
   res.json(results);
+  });
+
+app.put('/editar/:categoria/:id', async (req, res) => {
+
+
+    const categoria = req.params.categoria; 
+    const id = req.params.id; 
+    const data = req.body;   
+
+  console.log("PUT /editar llamado"); //NO IMPRIME NI MADRES
+  console.log("Categoria:", categoria);
+  console.log("ID:", id);
+  console.log("Datos recibidos:", data);
+if (!data || Object.keys(data).length === 0) {
+  console.error("Body vacío o inválido:", data);
+  return res.status(400).json({ error: 'Cuerpo de la solicitud vacío o inválido' });
+}
+  
+    try {
+      await connectDB();
+      if (!ObjectId.isValid(id)) {
+        console.error("ID inválido recibido:", id);
+        return res.status(400).json({ error: 'ID inválido: no es ObjectId VALIDO' });
+      }
+      
+      const result = await client.db(dbName).collection(categoria).updateOne(
+        { _id: new ObjectId(id) },
+        { $set: data }
+      );
+  
+      if (result.matchedCount === 0) {
+        return res.status(404).json({ error: 'Elemento no encontrado en MongoDB' });
+      }
+  
+      res.json({ mensaje: 'Elemento actualizado correctamente en MongoDB' });
+    } catch (error) {
+      console.error('Error actualizando MongoDB:', error);
+      res.status(500).json({ error: 'Error interno al actualizar en MongoDB' });
+    }
 });
+app.post('/agregar/:categoria', async (req, res) => {
+  const categoria = req.params.categoria;
+  const data = req.body;
+
+  console.log("POST /agregar llamado");
+  console.log("Categoria:", categoria);
+  console.log("Datos recibidos:", data);
+
+  if (!data || Object.keys(data).length === 0) {
+    return res.status(400).json({ error: 'Datos vacíos o inválidos' });
+  }
+
+  try {
+    await connectDB();
+
+    const result = await client.db(dbName).collection(categoria).insertOne(data);
+
+    res.status(201).json({
+      mensaje: 'Elemento agregado correctamente',
+      idInsertado: result.insertedId
+    });
+  } catch (error) {
+    console.error('Error al insertar en MongoDB:', error);
+    res.status(500).json({ error: 'Error interno al agregar el elemento' });
+  }
+});
+
 
 app.get('/', (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, 'public') });
