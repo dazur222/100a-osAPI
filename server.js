@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const path = require("path")
 const fs = require('fs');
-
+app.use(express.json());
 const { MongoClient, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://ayden:idtVHp069SguGV8z@liamscluster.cmwhtwb.mongodb.net/";
 
@@ -143,14 +143,20 @@ app.get('/search/eventos', async (req,res) => {
   });
 
 app.put('/editar/:categoria/:id', async (req, res) => {
-console.log("PUT /editar llamado"); //NO IMPRIME NI MADRES
-console.log("Categoria:", categoria);
-console.log("ID:", id);
-console.log("Datos recibidos:", data);
+
 
     const categoria = req.params.categoria; 
     const id = req.params.id; 
     const data = req.body;   
+
+  console.log("PUT /editar llamado"); //NO IMPRIME NI MADRES
+  console.log("Categoria:", categoria);
+  console.log("ID:", id);
+  console.log("Datos recibidos:", data);
+if (!data || Object.keys(data).length === 0) {
+  console.error("❌ Body vacío o inválido:", data);
+  return res.status(400).json({ error: 'Cuerpo de la solicitud vacío o inválido' });
+}
   
     try {
       await connectDB();
@@ -174,6 +180,33 @@ console.log("Datos recibidos:", data);
       res.status(500).json({ error: 'Error interno al actualizar en MongoDB' });
     }
 });
+app.post('/agregar/:categoria', async (req, res) => {
+  const categoria = req.params.categoria;
+  const data = req.body;
+
+  console.log("POST /agregar llamado");
+  console.log("Categoria:", categoria);
+  console.log("Datos recibidos:", data);
+
+  if (!data || Object.keys(data).length === 0) {
+    return res.status(400).json({ error: 'Datos vacíos o inválidos' });
+  }
+
+  try {
+    await connectDB();
+
+    const result = await client.db(dbName).collection(categoria).insertOne(data);
+
+    res.status(201).json({
+      mensaje: 'Elemento agregado correctamente',
+      idInsertado: result.insertedId
+    });
+  } catch (error) {
+    console.error('Error al insertar en MongoDB:', error);
+    res.status(500).json({ error: 'Error interno al agregar el elemento' });
+  }
+});
+
 
 app.get('/', (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, 'public') });

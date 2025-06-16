@@ -23,7 +23,7 @@
             <input type="text" id="searchInput" placeholder="Search something...">
             <i onclick="search()" class="fas fa-search search-icon" style="cursor: pointer"></i>
           </div>
-
+          
           <select id="category">
             <option value="personajes">Personajes</option>
             <option value="capitulos">Capitulos</option>
@@ -35,7 +35,19 @@
     </div>
   </div>
 </div>  
-
+<div class="new-entry-form" style="margin: 20px;">
+  <h2>Agregar nuevo elemento</h2>
+  <select id="newCategory">
+    <option value="personajes">Personajes</option>
+    <option value="capitulos">Capítulos</option>
+    <option value="lugares">Lugares</option>
+    <option value="objetos">Objetos</option>
+    <option value="eventos">Eventos</option>
+  </select><br><br>
+  <input type="text" id="newNombre" placeholder="Nombre" style="width: 100%; padding: 5px;"><br><br>
+  <textarea id="newDescripcion" placeholder="Descripción" style="width: 100%; padding: 5px;" rows="3"></textarea><br><br>
+  <button onclick="agregarNuevo()" style="padding: 10px 20px;">Guardar nuevo</button>
+</div>
 <div id="results"></div>
 
 <div class="cards-container" id="cardsContainer">
