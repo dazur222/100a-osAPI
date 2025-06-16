@@ -154,7 +154,7 @@ app.put('/editar/:categoria/:id', async (req, res) => {
   console.log("ID:", id);
   console.log("Datos recibidos:", data);
 if (!data || Object.keys(data).length === 0) {
-  console.error("❌ Body vacío o inválido:", data);
+  console.error("Body vacío o inválido:", data);
   return res.status(400).json({ error: 'Cuerpo de la solicitud vacío o inválido' });
 }
   
