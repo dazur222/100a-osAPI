@@ -1,50 +1,158 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    background-color: #f0f2f5;
-  }
+    min-height: 100vh;
+    position: relative;
+    background: #e6d3b3;
+    background-image: url('https://imgmedia.larepublica.pe/640x371/larepublica/original/2024/04/17/6620a2d444910638d140520b.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-  header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem;
+body:after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(230, 211, 179, 0.68); 
+    pointer-events: none;
+    z-index: 0;
+}
+
+header {
+    background: rgba(120, 80, 40, 0.92);
+    color: #f7e6c4; 
+    padding: 4.5rem 1rem 2rem 1rem;
     text-align: center;
-  }
+    box-shadow: 0 2px 12px rgba(120, 80, 40, 0.18);
+    border-bottom: 8px solid #b97a56;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+}
 
-  .search-container {
-    margin: 1rem auto;
-    text-align: center;
-  }
+header h1 {
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    color: #f7e6c4;
+    text-shadow: 2px 2px 0 #b97a56, 4px 4px 0 #e6d3b3;
+}
 
-  .search-container input[type="text"] {
-    width: 50%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .card {
-    background-color: white;
-    padding: 1rem;
+header:after {
+    content: '';
+    display: block;
+    margin: 1.5rem auto 0 auto;
+    width: 180px;
+    height: 14px;
+    background: repeating-linear-gradient(90deg, #b97a56 0 36px, #fff 36px 46px, #e6d3b3 46px 90px, #fff 90px 100px, #a67c52 100px 140px, #fff 140px 150px, #f7e6c4 150px 180px);
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
+}
 
-  .card h3 {
+.search-container {
+    margin: 4rem auto 2.5rem auto;
+    text-align: center;
+    background: rgba(255,255,255,0.96);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(120, 80, 40, 0.13);
+    max-width: 750px;
+    padding: 2.5rem 2rem 2rem 2rem;
+    border: 4px solid #b97a56;
+    border-style: dashed;
+    position: relative;
+    z-index: 2;
+}
+
+.search-container:before {
+    content: '';
+    position: absolute;
+    top: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 100px; height: 18px;
+    background: repeating-linear-gradient(90deg, #b97a56 0 25px, #fff 25px 30px, #e6d3b3 30px 60px, #fff 60px 65px, #a67c52 65px 100px);
+    border-radius: 8px 8px 0 0;
+}
+
+.search-container input[type="text"] {
+    width: 75%;
+    padding: 1.1rem;
+    font-size: 1.22rem;
+    border-radius: 12px;
+    border: 2.5px solid #b97a56;
+    background: #f7e6c4;
+    margin-bottom: 1rem;
+    transition: border 0.2s;
+}
+
+.search-container input[type="text"]:focus {
+    border: 2.5px solid #a67c52;
+    outline: none;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.8rem;
+    padding: 3rem 2rem 5rem 2rem;
+    max-width: 1500px;
+    margin: 0 auto;
+    z-index: 2;
+    position: relative;
+}
+
+.card {
+    background: linear-gradient(120deg, #f7e6c4 60%, #e6d3b3 100%);
+    padding: 2.5rem 2rem 2rem 2rem;
+    border-radius: 32px 32px 60px 60px/32px 32px 90px 90px;
+    box-shadow: 0 10px 40px rgba(120, 80, 40, 0.13);
+    border: 4px solid #b97a56;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border-style: double;
+    z-index: 2;
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 22px;
+    background: repeating-linear-gradient(90deg, #b97a56 0 22px, #fff 22px 27px, #e6d3b3 27px 45px, #fff 45px 50px, #a67c52 50px 90px);
+    border-radius: 0 0 16px 16px;
+    z-index: 3;
+}
+
+.card h3 {
     margin-top: 0;
-    color: #333;
-  }
+    color: #7c4a1a;
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    z-index: 4;
+    position: relative;
+    font-size: 1.45rem;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 0 #e6d3b3;
+}
 
-  .card p {
-    color: #666;
-  }
+.card p {
+    color: #5a3c1a;
+    z-index: 4;
+    position: relative;
+    font-size: 1.13rem;
+}
+
+@media (max-width: 700px) {
+    .search-container {
+        padding: 1.5rem 0.5rem 1.2rem 0.5rem;
+    }
+    .cards-container {
+        padding: 1.2rem 0.2rem 2.5rem 0.2rem;
+    }
+    .card {
+        padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+    }
+}
